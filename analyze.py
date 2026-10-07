@@ -122,7 +122,7 @@ with open(OUTPUT_FILE, "w") as f:
 print(f"Середній бал по класу:")
 print(f"math: {class_gpa_math:.1f}")
 print(f"python: {class_gpa_python:.1f}")
-print(f"english: {class_gpa_english:.1f}")
+print(f"english: {class_gpa_english:.1f}\n")
 print(f"Найкращий студент: {best_student} ({students_gpa[best_student]:.1f})")
 # ============================================================
 # Крок 5. Запушіть усе на GitHub
