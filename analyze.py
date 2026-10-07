@@ -111,7 +111,7 @@ class_gpa_english = total_english / students
 # Запустіть скрипт (python analyze.py) і перевірте, що в папці
 # з'явився файл result.txt.
 
-with open("OUTPUT_FILE.txt", "w") as f:
+with open("result.txt", "w") as f:
     f.write(f"Середній бал по класу:\n")
     f.write(f"math: {class_gpa_math:.1f}\n")
     f.write(f"python: {class_gpa_python:.1f}\n")
