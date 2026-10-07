@@ -42,21 +42,47 @@
 INPUT_FILE = "students.csv"
 OUTPUT_FILE = "result.txt"
 
+
+total_math = 0
+total_python = 0
+total_english = 0
 # TODO 1: відкрийте INPUT_FILE через with open(...) as f:
 #   і пропустіть рядок заголовка (next(f))
 
 with open(INPUT_FILE, "r") as f:
     next(f)
 
-# TODO 2: пройдіться по рядках файлу (for line in f:), для кожного рядка:
-#   - приберіть символ переносу рядка (line.strip())
-#   - розбийте рядок по комі (line.split(","))
-#   - перетворіть оцінки на числа (int або float)
+    # TODO 2: пройдіться по рядках файлу (for line in f:), для кожного рядка:
+    #   - приберіть символ переносу рядка (line.strip())
+    #   - розбийте рядок по комі (line.split(","))
+    #   - перетворіть оцінки на числа (int або float)
 
-for line in f:
-    line = line.strip()
-    grades = [int(grade) for grade in line.split(",")[1:]]
+    students = 0
+    students_gpa = {}
+    best_student = ""
+    for line in f:
+        line = line.strip()
+        grades = [int(grade) for grade in line.split(",")[1:]]
+        total_grades = sum(grades)
+        students += 1
 
+        name = line.split(",")[0]
+        
+        students_gpa[name] = total_grades / len(grades)
+
+        if best_student:
+            if students_gpa[name] > students_gpa[best_student]:
+                best_student = name
+        else:
+            best_student = name
+
+        total_math += grades[0]
+        total_python += grades[1]
+        total_english += grades[2]
+
+class_gpa_math = total_math / students
+class_gpa_python = total_python / students
+class_gpa_english = total_english / students
 
 # TODO 3: по ходу циклу накопичуйте:
 #   - суми оцінок з кожного предмета та кількість студентів
@@ -85,6 +111,12 @@ for line in f:
 # Запустіть скрипт (python analyze.py) і перевірте, що в папці
 # з'явився файл result.txt.
 
+with open("OUTPUT_FILE.txt", "w") as f:
+    f.write(f"Середній бал по класу:\n")
+    f.write(f"math: {class_gpa_math:.1f}\n")
+    f.write(f"python: {class_gpa_python:.1f}\n")
+    f.write(f"english: {class_gpa_english:.1f}\n")
+    f.write(f"Найкращий студент: {best_student} ({students_gpa[best_student]:.1f})")
 
 # ============================================================
 # Крок 5. Запушіть усе на GitHub
